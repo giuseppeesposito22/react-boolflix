@@ -1,10 +1,12 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function App() {
+  // Set delle variabili
   const [films, setFilms] = useState([]);
   const [query, setQuery] = useState("");
 
+  // Chiamate axios
   const handleSubmit = (query) => {
     axios
       .get(
@@ -12,7 +14,6 @@ function App() {
       )
       .then((res) => {
         const movies = res.data.results;
-        console.log(res.data.results);
 
         axios
           .get(
@@ -25,19 +26,33 @@ function App() {
       });
   };
 
+  // Gestione bandiere per le lignue
   const language = {
     en: "gb",
-    it: "it",
-    fr: "fr",
-    de: "de",
-    es: "es",
     ja: "jp",
     ko: "kr",
-    ru: "ru",
   };
 
   const flagByLanguage = (lang) => {
-    return `https://flagcdn.com/w20/${language[lang]}.png`;
+    const flagLanguage = language[lang] ?? lang;
+
+    return `https://flagcdn.com/w20/${flagLanguage}.png`;
+  };
+
+  const generateRate = (vote) => {
+    let ratingStar = [];
+
+    const rating = Math.floor(vote) / 2;
+
+    for (let i = 1; i <= 5; i++) {
+      if (i <= rating) {
+        ratingStar.push(<i class="bi bi-star-fill"></i>);
+      } else {
+        ratingStar.push(<i class="bi bi-star"></i>);
+      }
+    }
+
+    return ratingStar;
   };
 
   return (
@@ -72,10 +87,16 @@ function App() {
         {films.map((film) => (
           <ul key={film.id}>
             <li>
+              {
+                <img
+                  src={`https://image.tmdb.org/t/p/w92${film.poster_path}`}
+                  alt=""
+                />
+              }
               Titolo: {film.title || film.name}, Titolo originale:
               {film.original_title || film.original_name}, Lingua:
               {<img src={flagByLanguage(film.original_language)} alt="" />},
-              Voto: {film.vote_average}
+              Voto: {generateRate(film.vote_average)}
             </li>
           </ul>
         ))}

@@ -1,4 +1,8 @@
+import { useState } from "react";
+
 export default function ProductionCard({ production }) {
+  const [isOver, setIsOver] = useState(false);
+
   // Gestione bandiere per le lignue
   const language = {
     en: "gb",
@@ -9,7 +13,7 @@ export default function ProductionCard({ production }) {
   const flagByLanguage = (lang) => {
     const flagLanguage = language[lang] ?? lang;
 
-    return `https://flagcdn.com/w20/${flagLanguage}.png`;
+    return `https://flagcdn.com/w40/${flagLanguage}.png`;
   };
 
   // Generazione delle stelle per il rating
@@ -30,20 +34,36 @@ export default function ProductionCard({ production }) {
   };
 
   return (
-    <ul key={production.id}>
-      <li>
-        {
+    <div className="col mb-5">
+      <div
+        className="card h-100"
+        onMouseEnter={() => {
+          setIsOver(true);
+        }}
+        onMouseLeave={() => {
+          setIsOver(false);
+        }}
+      >
+        {isOver ? (
+          <div className="card-body bg-black text-bg-primary fs-3">
+            Titolo: {production.title || production.name} <br />
+            Titolo originale:{" "}
+            {production.original_title || production.original_name} <br />
+            Lingua:{" "}
+            {
+              <img src={flagByLanguage(production.original_language)} alt="" />
+            }{" "}
+            <br />
+            Voto: {generateRate(production.vote_average)}
+          </div>
+        ) : (
           <img
-            src={`https://image.tmdb.org/t/p/w92${production.poster_path}`}
+            className="img-fluid"
+            src={`https://image.tmdb.org/t/p/w342${production.poster_path}`}
             alt=""
           />
-        }
-        Titolo: {production.title || production.name}, Titolo originale:
-        {production.original_title || production.original_name}, Lingua:
-        {<img src={flagByLanguage(production.original_language)} alt="" />},
-        Voto:
-        {generateRate(production.vote_average)}
-      </li>
-    </ul>
+        )}
+      </div>
+    </div>
   );
 }

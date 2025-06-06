@@ -24,9 +24,9 @@ export default function ProductionsList() {
 
     for (let i = 1; i <= 5; i++) {
       if (i <= rating) {
-        ratingStar.push(<i class="bi bi-star-fill"></i>);
+        ratingStar.push(<i key={i} className="bi bi-star-fill"></i>);
       } else {
-        ratingStar.push(<i class="bi bi-star"></i>);
+        ratingStar.push(<i key={i} className="bi bi-star"></i>);
       }
     }
 

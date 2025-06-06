@@ -45,7 +45,7 @@ export default function ProductionCard({ production }) {
         }}
       >
         {isOver ? (
-          <div className="card-body bg-black text-bg-primary fs-3">
+          <div className="card-body bg-black text-bg-primary h-100">
             Titolo: {production.title || production.name} <br />
             Titolo originale:{" "}
             {production.original_title || production.original_name} <br />
@@ -54,12 +54,18 @@ export default function ProductionCard({ production }) {
               <img src={flagByLanguage(production.original_language)} alt="" />
             }{" "}
             <br />
-            Voto: {generateRate(production.vote_average)}
+            Voto: {generateRate(production.vote_average)} <br />
+            Overview:{" "}
+            {production.overview ? production.overview : "Nessuna descrizione"}
           </div>
         ) : (
           <img
-            className="img-fluid"
-            src={`https://image.tmdb.org/t/p/w342${production.poster_path}`}
+            className="img-poster"
+            src={
+              production.poster_path
+                ? `https://image.tmdb.org/t/p/w342${production.poster_path}`
+                : "src/assets/img/img-placeholder.jpg"
+            }
             alt=""
           />
         )}

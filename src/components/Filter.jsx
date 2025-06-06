@@ -22,8 +22,8 @@ export default function Filter() {
           setQuery(e.target.value);
         }}
       />
-      <button className="btn btn-outline-success" type="submit">
-        Search
+      <button className="btn btn-outline-danger" type="submit">
+        Cerca
       </button>
     </form>
   );

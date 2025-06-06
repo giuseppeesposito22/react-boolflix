@@ -6,9 +6,11 @@ export default function ProductionsList() {
 
   return (
     <>
-      {productions.map((production) => (
-        <ProductionCard key={production.id} production={production} />
-      ))}
+      <div className="row row-cols-6">
+        {productions.map((production) => (
+          <ProductionCard key={production.id} production={production} />
+        ))}
+      </div>
     </>
   );
 }

@@ -2,5 +2,9 @@ body {
   margin: 0;
   /* display: flex; */
 
-  min-height: 100vh;
+  height: 100vh;
+}
+
+.bi {
+  color: rgb(199, 196, 12);
 }

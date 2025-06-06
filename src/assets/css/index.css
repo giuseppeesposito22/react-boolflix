@@ -3,8 +3,30 @@ body {
   /* display: flex; */
 
   height: 100vh;
+  background-color: grey;
 }
 
 .bi {
   color: rgb(199, 196, 12);
+}
+
+.col {
+  height: 500px;
+}
+
+.card {
+  border: 2px solid white;
+  border-radius: 0;
+}
+
+.card-body {
+  overflow-y: auto;
+}
+
+.img-poster {
+  height: 100%;
+}
+
+.navbar-brand {
+  color: red;
 }
